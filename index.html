@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Locometry — Global Manufacturing, Matched by Distance</title>
+<meta name="description" content="Need something manufactured nearby? Send us the requirement — Locometry finds the right industrial machine shop capacity (CNC, fabrication, machining, laser, injection molding, 3D printing, components) anywhere in our global network, and gets it produced, radius-first.">
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHJ4PSIxMyIgZmlsbD0iIzE2MjczRiIgc3Ryb2tlPSIjM0E1MTcwIiBzdHJva2Utd2lkdGg9IjEuNSIvPgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDE4LDQ4KSByb3RhdGUoLTE0KSI+CiAgICA8Y2lyY2xlIGN4PSIwIiBjeT0iMCIgcj0iMjMiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzhGQTNCOCIgc3Ryb2tlLXdpZHRoPSIxLjQiIG9wYWNpdHk9IjAuNDUiIHN0cm9rZS1kYXNoYXJyYXk9IjIuNCAzLjIiLz4KICAgIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIxNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOEZBM0I4IiBzdHJva2Utd2lkdGg9IjEuMyIgb3BhY2l0eT0iMC4zNSIvPgogICAgPGxpbmUgeDE9IjAiIHkxPSIwIiB4Mj0iMCIgeTI9Ii0zMCIgc3Ryb2tlPSIjRURFRkYyIiBzdHJva2Utd2lkdGg9IjQuOCIgc3Ryb2tlLWxpbmVjYXA9ImJ1dHQiLz4KICAgIDxsaW5lIHgxPSIwIiB5MT0iMCIgeDI9IjI2IiB5Mj0iMCIgc3Ryb2tlPSIjRURFRkYyIiBzdHJva2Utd2lkdGg9IjQuOCIgc3Ryb2tlLWxpbmVjYXA9ImJ1dHQiLz4KICAgIDxwYXRoIGQ9Ik0gMy43NCwtMTcuNjEgQSAxOCwxOCAwIDAgMSAxNy42MSwtMy43NCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRkY4QTNEIiBzdHJva2Utd2lkdGg9IjMuNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgICA8cG9seWdvbiBwb2ludHM9IjAsLTM5IDUuNSwtMzAgLTUuNSwtMzAiIGZpbGw9IiNGRjhBM0QiLz4KICAgIDxwb2x5Z29uIHBvaW50cz0iMzQsMCAyNiwtNC40IDI2LDQuNCIgZmlsbD0iI0ZGOEEzRCIvPgogICAgPGNpcmNsZSBjeD0iMCIgY3k9IjAiIHI9IjMuNCIgZmlsbD0iIzE2MjczRiIvPgogICAgPGNpcmNsZSBjeD0iMCIgY3k9IjAiIHI9IjIuOCIgZmlsbD0iI0VERUZGMiIvPgogIDwvZz4KPC9zdmc+Cg==">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0F1B2D;
+    --chart:#16273F;
+    --chart-2:#1D3452;
+    --amber:#FF8A3D;
+    --steel:#8FA3B8;
+    --paper:#EDEFF2;
+    --line: rgba(143,163,184,0.18);
+    --signal:#4ADE80;
+    color-scheme:dark;
+  }
+  html[data-theme="light"]{
+    --ink:#F4F5F7;
+    --chart:#FFFFFF;
+    --chart-2:#E8EBEF;
+    --amber:#D9631A;
+    --steel:#5B6B7D;
+    --paper:#131E2E;
+    --line: rgba(19,30,46,0.12);
+    --signal:#1A9B52;
+    color-scheme:light;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:'Inter',sans-serif;
+    line-height:1.5;
+    overflow-x:hidden;
+    transition:background-color .25s ease, color .25s ease;
+  }
+  .mono{font-family:'JetBrains Mono',monospace;}
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-0.01em;}
+  a{color:inherit;text-decoration:none;}
+
+  /* faint blueprint grid background */
+  .grid-bg{
+    position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:64px 64px;
+    opacity:0.5;
+    -webkit-mask-image: radial-gradient(ellipse 100% 60% at 50% 0%, black 40%, transparent 90%);
+    mask-image: radial-gradient(ellipse 100% 60% at 50% 0%, black 40%, transparent 90%);
+  }
+
+  header{
+    position:relative;z-index:2;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:28px 6vw;
+    border-bottom:1px solid var(--line);
+  }
+  .logo{display:flex;align-items:center;gap:10px;font-size:19px;font-weight:700;letter-spacing:0.01em;}
+  .logo svg{display:block;flex-shrink:0;}
+  .logo-text{display:flex;flex-direction:column;line-height:1.15;}
+  .logo-tag{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:500;letter-spacing:0.07em;color:var(--steel);margin-top:2px;white-space:nowrap;}
+  @media (max-width:600px){ .logo-tag{font-size:7.5px;letter-spacing:0.04em;} }
+  @media (max-width:340px){ .logo-tag{font-size:6.5px;letter-spacing:0.02em;} }
+  nav{display:flex;gap:36px;font-size:14px;color:var(--steel);}
+  nav a:hover{color:var(--paper);}
+  .nav-cta{
+    border:1px solid var(--steel);
+    padding:9px 18px;border-radius:2px;
+    font-size:13px;letter-spacing:0.02em;color:var(--paper);
+    transition:all .2s;
+  }
+  .nav-cta:hover{border-color:var(--amber);color:var(--amber);}
+
+  /* HAMBURGER + MOBILE MENU */
+  .hamburger{
+    display:none;flex-direction:column;justify-content:center;gap:5px;
+    background:none;border:none;cursor:pointer;padding:8px;z-index:30;
+    position:relative;
+  }
+  .hamburger span{
+    display:block;width:22px;height:2px;background:var(--paper);
+    transition:transform .25s ease, opacity .2s ease;
+  }
+  .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .hamburger.open span:nth-child(2){opacity:0;}
+  .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+  .menu-backdrop{
+    position:fixed;inset:0;background:rgba(15,27,45,0.65);
+    z-index:25;opacity:0;pointer-events:none;transition:opacity .25s ease;
+  }
+  .menu-backdrop.open{opacity:1;pointer-events:auto;}
+
+  .mobile-menu{
+    position:fixed;top:0;right:0;height:100vh;width:min(80vw,320px);
+    background:var(--chart);border-left:1px solid var(--line);
+    z-index:28;padding:90px 28px 32px;
+    display:flex;flex-direction:column;
+    transform:translateX(100%);transition:transform .3s ease;
+    overflow-y:auto;
+  }
+  .mobile-menu.open{transform:translateX(0);}
+  .mobile-menu nav{
+    display:flex;flex-direction:column;gap:2px;margin-bottom:28px;
+  }
+  .mobile-menu nav a{
+    padding:15px 4px;font-size:16px;color:var(--paper);
+    border-bottom:1px solid var(--line);
+  }
+  .mobile-menu nav a:hover{color:var(--amber);}
+  .mobile-menu .btn-primary.full{text-align:center;}
+
+  body.no-scroll{overflow:hidden;}
+
+  /* PRE-LAUNCH BANNER */
+  .prelaunch-bar{
+    position:relative;z-index:2;
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    flex-wrap:wrap;
+    background:var(--chart);border-bottom:1px solid var(--line);
+    padding:11px 6vw;text-align:center;
+    font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--steel);
+  }
+  .prelaunch-bar .pulse-dot{
+    width:7px;height:7px;border-radius:50%;background:var(--amber);
+    box-shadow:0 0 0 4px rgba(255,138,61,0.18);
+    animation:barpulse 1.8s ease-in-out infinite;flex-shrink:0;
+  }
+  @keyframes barpulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
+  .prelaunch-bar a{color:var(--amber);text-decoration:underline;}
+  @media (prefers-reduced-motion: reduce){ .prelaunch-bar .pulse-dot{animation:none;} }
+
+  /* HERO */
+  .hero{
+    position:relative;z-index:2;
+    display:grid;grid-template-columns:1.05fr 1fr;
+    gap:40px;
+    padding:9vh 6vw 10vh;
+    align-items:center;
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;letter-spacing:0.08em;color:var(--amber);
+    border:1px solid rgba(255,138,61,0.35);
+    padding:6px 12px;border-radius:2px;
+    margin-bottom:26px;
+  }
+  .hero h1{
+    font-size:clamp(24px, 2.6vw, 42px);
+    line-height:1.18;
+    margin-bottom:22px;
+    max-width:32ch;
+    text-wrap:balance;
+  }
+  .hero h1 em{font-style:normal;color:var(--amber);}
+  .hero-pitch{
+    border-left:2px solid var(--amber);padding-left:18px;
+    margin-bottom:28px;max-width:480px;
+  }
+  .hero-pitch p{font-family:'Space Grotesk',sans-serif;font-size:17.5px;line-height:1.45;}
+  .hero-pitch p.q{color:var(--steel);margin-bottom:5px;}
+  .hero-pitch p.a{color:var(--paper);font-weight:600;}
+  .hero p.sub{
+    font-size:17px;color:var(--steel);max-width:480px;margin-bottom:34px;
+  }
+  .hero-ctas{display:flex;gap:14px;margin-bottom:44px;}
+  .btn-primary{
+    background:var(--amber);color:var(--ink);
+    padding:14px 26px;border-radius:2px;font-weight:600;font-size:14.5px;
+    transition:transform .15s ease;
+  }
+  .btn-primary:hover{transform:translateY(-1px);}
+  .btn-secondary{
+    border:1px solid var(--line);color:var(--paper);
+    padding:14px 26px;border-radius:2px;font-size:14.5px;
+  }
+  .btn-secondary:hover{border-color:var(--steel);}
+  .hero-stats{display:flex;gap:38px;}
+  .hero-stats div{border-left:2px solid var(--amber);padding-left:14px;}
+  .hero-stats .num{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:500;}
+  .hero-stats .lbl{font-size:12px;color:var(--steel);margin-top:2px;}
+
+  /* RADAR */
+  .radar-wrap{
+    position:relative;
+    width:100%;aspect-ratio:1/1;max-width:520px;justify-self:center;
+    margin-bottom:34px;
+  }
+  .radar-ring{
+    position:absolute;border:1px solid var(--line);border-radius:50%;
+    top:50%;left:50%;transform:translate(-50%,-50%);
+  }
+  .radar-ring.r1{width:30%;height:30%;}
+  .radar-ring.r2{width:56%;height:56%;}
+  .radar-ring.r3{width:82%;height:82%;}
+  .radar-ring.r4{width:100%;height:100%;}
+  .radar-label{
+    position:absolute;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--steel);
+    left:50%;transform:translateX(-50%);
+  }
+  .radar-label.l1{top:calc(50% - 15%);}
+  .radar-label.l2{top:calc(50% - 28%);}
+  .radar-label.l3{top:calc(50% - 41%);}
+  .radar-sweep{
+    position:absolute;top:50%;left:50%;width:50%;height:2px;
+    transform-origin:left center;
+    background:linear-gradient(90deg, rgba(255,138,61,0.85), transparent);
+    animation:sweep 4.2s linear infinite;
+  }
+  @keyframes sweep{ to{ transform:rotate(360deg);} }
+  .radar-center{
+    position:absolute;top:50%;left:50%;width:10px;height:10px;border-radius:50%;
+    background:var(--paper);transform:translate(-50%,-50%);
+    box-shadow:0 0 0 5px rgba(237,239,242,0.12);
+    z-index:3;
+  }
+  .blip{
+    position:absolute;width:9px;height:9px;border-radius:50%;background:var(--amber);
+    box-shadow:0 0 10px 2px rgba(255,138,61,0.6);
+    animation:pulse 2.6s ease-in-out infinite;
+  }
+  .blip .tag{
+    position:absolute;top:14px;left:50%;transform:translateX(-50%);
+    white-space:nowrap;font-family:'JetBrains Mono',monospace;font-size:10.5px;
+    color:var(--steel);background:var(--ink);padding:2px 6px;border:1px solid var(--line);
+    opacity:0;transition:opacity .2s;
+  }
+  .blip:hover .tag{opacity:1;}
+  @keyframes pulse{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.4);opacity:0.65;}}
+  .radar-caption{
+    position:absolute;bottom:-30px;left:50%;transform:translateX(-50%);
+    font-size:11px;color:var(--steel);white-space:nowrap;
+  }
+
+  /* SECTION generic */
+  section{position:relative;z-index:2;padding:9vh 6vw;}
+  .section-head{max-width:640px;margin-bottom:64px;}
+  .section-tag{
+    font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--amber);
+    letter-spacing:0.08em;margin-bottom:14px;display:block;
+  }
+  .section-head h2{font-size:clamp(26px,3vw,38px);text-wrap:balance;max-width:34ch;}
+
+  /* THE NAME — brand breakdown */
+  .brand-name{border-top:1px solid var(--line);}
+  .name-equation{
+    font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:0.06em;
+    color:var(--steel);margin-top:-8px;margin-bottom:0;
+  }
+  .name-equation b{color:var(--amber);font-weight:500;}
+  .name-tagline{font-size:clamp(22px,2.6vw,34px);line-height:1.4;}
+  .name-tagline .verb{color:var(--amber);}
+  @media (max-width:600px){ .name-tagline{font-size:clamp(19px,5.4vw,24px);} }
+  .name-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  .name-card{background:var(--ink);padding:38px 32px;}
+  .name-frag{
+    font-family:'JetBrains Mono',monospace;color:var(--amber);
+    font-size:clamp(28px,2.6vw,36px);font-weight:500;letter-spacing:0.01em;
+    margin-bottom:20px;
+  }
+  .name-mean{color:var(--paper);font-size:14.5px;line-height:1.5;margin-bottom:10px;}
+  .name-desc{color:var(--steel);font-size:14px;line-height:1.55;}
+  @media (max-width:860px){ .name-grid{grid-template-columns:1fr;} }
+
+  /* HOW IT WORKS */
+  .how{border-top:1px solid var(--line);}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  .step{background:var(--ink);padding:38px 32px;}
+  .step .dist{font-family:'JetBrains Mono',monospace;color:var(--amber);font-size:13px;margin-bottom:18px;}
+  .step h3{font-size:19px;margin-bottom:12px;}
+  .step p{color:var(--steel);font-size:14.5px;}
+
+  /* WHY PROXIMITY — reuses .steps but needs 4-up grid */
+  .why .steps{grid-template-columns:repeat(4,1fr);}
+  @media (max-width:1080px){ .why .steps{grid-template-columns:repeat(2,1fr);} }
+
+  /* FOUNDING METROS */
+  .metros{border-top:1px solid var(--line);}
+  .metro-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-bottom:26px;}
+  .metro-card{background:var(--ink);padding:28px 24px;}
+  .metro-card.open{background:var(--chart);}
+  .metro-status{font-size:11.5px;letter-spacing:0.05em;margin-bottom:14px;color:var(--steel);}
+  .metro-card.open .metro-status{color:var(--signal);}
+
+  .model .dist{margin-bottom:6px;}
+  .metro-card h4{font-size:17px;margin-bottom:8px;font-family:'Space Grotesk',sans-serif;}
+  .metro-card p{color:var(--steel);font-size:13.5px;}
+  .metro-note{color:var(--steel);font-size:13.5px;max-width:640px;}
+  @media (max-width:860px){ .metro-grid{grid-template-columns:repeat(2,1fr);} }
+
+  /* PROXIMITY TIERS */
+  .tiers{border-top:1px solid var(--line);}
+  .tier-row{
+    display:grid;grid-template-columns:140px 1fr 200px;gap:24px;
+    align-items:center;padding:26px 0;border-bottom:1px solid var(--line);
+  }
+  .tier-row:first-of-type{border-top:1px solid var(--line);}
+  .tier-radius{font-family:'JetBrains Mono',monospace;font-size:15px;color:var(--amber);}
+  .tier-desc h4{font-size:17px;margin-bottom:6px;font-family:'Space Grotesk',sans-serif;}
+  .tier-desc p{color:var(--steel);font-size:14px;}
+  .tier-eta{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--steel);text-align:right;}
+  .tier-eta b{color:var(--paper);display:block;font-size:16px;}
+
+  /* NETWORK STATS */
+  .stats-band{
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    display:grid;grid-template-columns:repeat(4,1fr);
+  }
+  .stats-band div{padding:44px 30px;border-left:1px solid var(--line);}
+  .stats-band div:first-child{border-left:none;}
+  .stats-band .num{font-family:'JetBrains Mono',monospace;font-size:34px;color:var(--amber);}
+  .stats-band .lbl{color:var(--steel);font-size:13.5px;margin-top:6px;}
+
+  /* FOR BUSINESSES — REQUEST FORM */
+  .request{border-top:1px solid var(--line);}
+  .section-head p.lead{color:var(--steel);font-size:15.5px;margin-top:14px;}
+  .request-grid{display:grid;grid-template-columns:0.8fr 1.2fr;gap:56px;align-items:start;}
+  .info-block{margin-bottom:36px;}
+  .info-block h4{font-family:'Space Grotesk',sans-serif;font-size:14px;color:var(--steel);
+    text-transform:uppercase;letter-spacing:0.06em;margin-bottom:16px;}
+  .chip-list{display:flex;flex-wrap:wrap;gap:8px;list-style:none;}
+  .chip-list li{
+    font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--paper);
+    border:1px solid var(--line);padding:7px 12px;border-radius:2px;
+  }
+  .mini-steps{list-style:none;counter-reset:mini;}
+  .mini-steps li{
+    counter-increment:mini;position:relative;padding-left:28px;margin-bottom:14px;
+    font-size:14px;color:var(--steel);
+  }
+  .mini-steps li::before{
+    content:counter(mini);position:absolute;left:0;top:0;
+    font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--amber);
+    border:1px solid rgba(255,138,61,0.35);width:18px;height:18px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+  }
+
+  .form-card{background:var(--chart);border:1px solid var(--line);border-radius:3px;padding:36px;}
+  .field{margin-bottom:20px;}
+  .form-row.two{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  label{
+    display:block;font-family:'JetBrains Mono',monospace;font-size:11.5px;
+    color:var(--steel);letter-spacing:0.04em;margin-bottom:8px;text-transform:uppercase;
+  }
+  input[type=text], input[type=email], input[type=number], select, textarea{
+    width:100%;background:var(--ink);border:1px solid var(--line);color:var(--paper);
+    padding:12px 14px;border-radius:2px;font-family:'Inter',sans-serif;font-size:14px;
+    outline:none;transition:border-color .15s;
+  }
+  input:focus, select:focus, textarea:focus{border-color:var(--amber);}
+  textarea{resize:vertical;min-height:88px;}
+  select{appearance:none;-webkit-appearance:none;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6'><path d='M0 0l5 6 5-6z' fill='%238FA3B8'/></svg>");
+    background-repeat:no-repeat;background-position:right 14px center;padding-right:34px;
+  }
+
+  .dropzone{
+    border:1.5px dashed var(--line);border-radius:2px;padding:26px;text-align:center;
+    cursor:pointer;transition:border-color .15s, background .15s;
+  }
+  .dropzone.drag{border-color:var(--amber);background:rgba(255,138,61,0.06);}
+  .dz-text{color:var(--steel);font-size:13.5px;}
+  .dz-browse{color:var(--amber);text-decoration:underline;}
+  .dz-filename{margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--paper);}
+  .dz-hint{color:var(--steel);font-size:12px;margin-top:8px;}
+  .optional-tag{text-transform:none;color:var(--steel);font-size:11px;letter-spacing:0;}
+
+  .file-list{list-style:none;margin-top:12px;display:flex;flex-direction:column;gap:8px;}
+  .file-list li{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    background:var(--ink);border:1px solid var(--line);border-radius:2px;
+    padding:9px 12px;font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--paper);
+  }
+  .file-list li .file-remove{
+    color:var(--steel);cursor:pointer;font-size:14px;line-height:1;flex-shrink:0;
+    background:none;border:none;padding:0 2px;
+  }
+  .file-list li .file-remove:hover{color:var(--amber);}
+
+  .scope-badge{
+    display:none;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;
+    font-size:12px;padding:9px 13px;border-radius:2px;margin-bottom:20px;
+  }
+  .scope-badge.show{display:flex;}
+  .scope-badge .sb-dot{width:7px;height:7px;border-radius:50%;}
+  .scope-badge.in-scope{background:rgba(74,222,128,0.08);border:1px solid rgba(74,222,128,0.35);color:var(--signal);}
+  .scope-badge.in-scope .sb-dot{background:var(--signal);}
+  .scope-badge.flagged{background:rgba(255,138,61,0.08);border:1px solid rgba(255,138,61,0.35);color:var(--amber);}
+  .scope-badge.flagged .sb-dot{background:var(--amber);}
+
+  .btn-primary.full{width:100%;text-align:center;border:none;cursor:pointer;}
+  .btn-secondary{cursor:pointer;background:transparent;font-family:'Inter',sans-serif;}
+
+  .confirm-panel{
+    background:var(--chart);border:1px solid rgba(74,222,128,0.3);border-radius:3px;padding:40px;
+  }
+  .confirm-ref{color:var(--steel);font-size:12px;margin-bottom:14px;}
+  .confirm-panel h3{font-size:22px;margin-bottom:12px;}
+  .confirm-panel > p{color:var(--steel);font-size:14.5px;margin-bottom:26px;}
+  .confirm-meta{border-top:1px solid var(--line);padding-top:20px;margin-bottom:26px;}
+  .confirm-meta div{display:flex;justify-content:space-between;padding:8px 0;font-size:13.5px;}
+  .confirm-meta div span:first-child{color:var(--steel);}
+  .confirm-meta div span:last-child{font-family:'JetBrains Mono',monospace;color:var(--paper);}
+
+  /* FOR SHOPS — PIPELINE + INQUIRY */
+  .shops{border-top:1px solid var(--line);}
+  .shops-grid{display:grid;grid-template-columns:0.8fr 1.2fr;gap:56px;align-items:start;}
+  .shops-info .info-block{margin-bottom:36px;}
+  .shops-info .info-block:last-child{margin-bottom:0;}
+  .pipeline{display:flex;flex-direction:column;gap:12px;}
+  .pipe-step{
+    border:1px solid var(--line);border-radius:2px;padding:22px 20px;
+    transition:border-color .3s, background .3s;
+  }
+  .pipe-step.active{border-color:var(--amber);background:rgba(255,138,61,0.05);}
+  .pipe-step.done{border-color:rgba(74,222,128,0.4);background:rgba(74,222,128,0.05);}
+  .pipe-num{color:var(--amber);font-size:12px;margin-bottom:12px;}
+  .pipe-step.done .pipe-num{color:var(--signal);}
+  .pipe-step h4{font-size:15.5px;margin-bottom:8px;font-family:'Space Grotesk',sans-serif;}
+  .pipe-step p{color:var(--steel);font-size:13px;}
+  .pipe-arrow{display:flex;align-items:center;justify-content:center;height:18px;color:var(--steel);font-size:16px;transform:rotate(90deg);}
+
+  .capability-toggles{display:flex;flex-wrap:wrap;gap:10px;}
+  .cap-pill{
+    font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--steel);
+    border:1px solid var(--line);padding:9px 14px;border-radius:2px;cursor:pointer;
+    user-select:none;transition:all .15s;
+  }
+  .cap-pill input{display:none;}
+  .cap-pill.checked{border-color:var(--amber);color:var(--amber);background:rgba(255,138,61,0.06);}
+
+  /* CTA FOOTER */
+  .cta-foot{text-align:center;padding:12vh 6vw;}
+  .cta-foot h2{font-size:clamp(28px,4vw,46px);max-width:26ch;margin:0 auto 30px;text-wrap:balance;}
+  footer{
+    border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;align-items:center;
+    padding:26px 6vw;color:var(--steel);font-size:13px;
+  }
+  .footer-brand{display:flex;align-items:center;gap:9px;color:var(--paper);font-weight:700;}
+  .footer-brand svg{display:block;flex-shrink:0;}
+
+  @media (max-width:860px){
+    .hero{grid-template-columns:1fr;padding-top:6vh;}
+    nav{display:none;}
+    .nav-cta{display:none;}
+    .hamburger{display:flex;}
+    .steps{grid-template-columns:1fr;}
+    .stats-band{grid-template-columns:repeat(2,1fr);}
+    .stats-band div:nth-child(3){border-left:none;}
+    .tier-row{grid-template-columns:1fr;gap:8px;}
+    .tier-eta{text-align:left;}
+    .request-grid{grid-template-columns:1fr;gap:40px;}
+    .shops-grid{grid-template-columns:1fr;gap:40px;}
+    .form-row.two{grid-template-columns:1fr;}
+    .form-card, .confirm-panel{padding:26px;}
+  }
+
+  @media (max-width:600px){
+    header{padding:20px 5vw;}
+    .prelaunch-bar{padding:10px 5vw;font-size:11.5px;}
+    section{padding:7vh 5vw;}
+    .section-head{margin-bottom:44px;}
+    .hero{padding:5vh 5vw 7vh;gap:28px;}
+    .hero h1{font-size:clamp(26px,7.8vw,34px);}
+    .hero-br{display:none;}
+    .section-head h2{font-size:clamp(20px,5.6vw,26px);max-width:22ch;}
+    .cta-foot h2{font-size:clamp(22px,6.4vw,30px);max-width:20ch;}
+    .hero-ctas{flex-direction:column;gap:12px;}
+    .hero-ctas a{text-align:center;}
+    .hero-stats{flex-wrap:wrap;row-gap:18px;column-gap:28px;}
+    .metro-grid{grid-template-columns:1fr;}
+    .stats-band{grid-template-columns:1fr;}
+    .stats-band div{border-left:none;border-top:1px solid var(--line);}
+    .stats-band div:first-child{border-top:none;}
+    .why .steps{grid-template-columns:1fr;}
+    .cta-foot .hero-ctas{flex-direction:column;align-items:stretch;}
+  }
+
+  @media (max-width:360px){ .hero h1{font-size:23px;} }
+
+  @media (prefers-reduced-motion: reduce){
+    .radar-sweep{animation:none;}
+    .blip{animation:none;}
+  }
+
+  /* THEME TOGGLE */
+  header, .mobile-menu, .prelaunch-bar, .step, .metro-card, .form-card,
+  .confirm-panel, input, select, textarea, .file-list li, .pipe-step,
+  .cap-pill, .dropzone, .tier-row, .stats-band, .stats-band div, footer,
+  .blip .tag, .steps, .metro-grid{
+    transition:background-color .25s ease, border-color .25s ease, color .25s ease;
+  }
+  .theme-toggle{
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+    width:38px;height:38px;
+    border:1px solid var(--steel);border-radius:2px;
+    background:none;cursor:pointer;color:var(--paper);
+    transition:border-color .2s ease, color .2s ease;
+  }
+  .theme-toggle:hover{border-color:var(--amber);color:var(--amber);}
+  .theme-toggle svg{display:block;width:17px;height:17px;}
+  .theme-toggle .icon-sun{display:block;}
+  .theme-toggle .icon-moon{display:none;}
+  html[data-theme="light"] .theme-toggle .icon-sun{display:none;}
+  html[data-theme="light"] .theme-toggle .icon-moon{display:block;}
+  .header-actions{display:flex;align-items:center;gap:14px;}
+  @media (max-width:600px){ .theme-toggle{width:34px;height:34px;} .theme-toggle svg{width:15px;height:15px;} }
+</style>
+<script>
+  (function(){
+    try{
+      if(localStorage.getItem('locometry-theme') === 'light'){
+        document.documentElement.setAttribute('data-theme','light');
+      }
+    }catch(e){}
+  })();
+</script>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+
+<div class="prelaunch-bar">
+  <span class="pulse-dot"></span>
+  Locometry is pre-launch — we're building the founding network of businesses and machine shops.
+  <a href="#request">Submit a job →</a>
+  <span style="color:var(--line);">/</span>
+  <a href="#shops">Register your shop →</a>
+</div>
+
+<header>
+  <div class="logo">
+    <svg width="36" height="36" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+      <rect width="64" height="64" rx="13" fill="#16273F" stroke="#3A5170" stroke-width="1.5"/>
+      <g transform="translate(18,48) rotate(-14)">
+        <circle cx="0" cy="0" r="23" fill="none" stroke="#8FA3B8" stroke-width="1.4" opacity="0.45" stroke-dasharray="2.4 3.2"/>
+        <circle cx="0" cy="0" r="14" fill="none" stroke="#8FA3B8" stroke-width="1.3" opacity="0.35"/>
+        <line x1="0" y1="0" x2="0" y2="-30" stroke="#EDEFF2" stroke-width="4.8" stroke-linecap="butt"/>
+        <line x1="0" y1="0" x2="26" y2="0" stroke="#EDEFF2" stroke-width="4.8" stroke-linecap="butt"/>
+        <path d="M 3.74,-17.61 A 18,18 0 0 1 17.61,-3.74" fill="none" stroke="#FF8A3D" stroke-width="3.4" stroke-linecap="round"/>
+        <polygon points="0,-39 5.5,-30 -5.5,-30" fill="#FF8A3D"/>
+        <polygon points="34,0 26,-4.4 26,4.4" fill="#FF8A3D"/>
+        <circle cx="0" cy="0" r="3.4" fill="#16273F"/>
+        <circle cx="0" cy="0" r="2.8" fill="#EDEFF2"/>
+      </g>
+    </svg>
+    <div class="logo-text">
+      <span>LOCOMETRY</span>
+      <span class="logo-tag">WHERE THINGS GET MADE</span>
+    </div>
+  </div>
+  <nav>
+    <a href="#model">The model</a>
+    <a href="#how">How it works</a>
+    <a href="#tiers">Radius tiers</a>
+    <a href="#metros">Founding clusters</a>
+    <a href="#request">Submit a job</a>
+    <a href="#shops">Machine shops</a>
+  </nav>
+  <div class="header-actions">
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to light theme">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20.6 15.3A8.5 8.5 0 1 1 8.7 3.4a7 7 0 0 0 11.9 11.9Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+      </svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="4.4" stroke="currentColor" stroke-width="1.7"/>
+        <path d="M12 2.5v2.6M12 18.9v2.6M4.4 4.4l1.85 1.85M17.75 17.75l1.85 1.85M2.5 12h2.6M18.9 12h2.6M4.4 19.6l1.85-1.85M17.75 6.25l1.85-1.85" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <a class="nav-cta" href="#shops">Register your shop →</a>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="menu-backdrop" id="menuBackdrop"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <nav>
+    <a href="#model">The model</a>
+    <a href="#how">How it works</a>
+    <a href="#tiers">Radius tiers</a>
+    <a href="#metros">Founding clusters</a>
+    <a href="#request">Submit a job</a>
+    <a href="#shops">Machine shops</a>
+  </nav>
+  <a class="btn-primary full" href="#shops">Register your shop →</a>
+</div>
+
+<section class="hero">
+  <div>
+    <span class="eyebrow">● PRE-LAUNCH — industrial machine shops</span>
+    <h1>Machines, minutes away.<br class="hero-br">The nearest shop <em>to build it</em>.</h1>
+    <div class="hero-pitch">
+      <p class="q">"Need something manufactured locally?</p>
+      <p class="a">Send us the requirement. We'll find the right capacity and get it produced."</p>
+    </div>
+    <p class="sub">Industrial machine shops — CNC, fabrication, machining, laser, injection molding, 3D printing, components — every shop vetted for capability, matched by distance first. Cluster by cluster across India's manufacturing belts, so "local" stays a promise we can keep.</p>
+    <div class="hero-ctas">
+      <a class="btn-primary" href="#request">Submit a founding job →</a>
+      <a class="btn-secondary" href="#shops">Partner as a machine shop</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="num">80 km</div><div class="lbl">default local radius</div></div>
+      <div><div class="num">7</div><div class="lbl">in-scope work categories</div></div>
+      <div><div class="num">0%</div><div class="lbl">platform fee, founding cohort</div></div>
+    </div>
+  </div>
+  <div class="radar-wrap">
+    <div class="radar-ring r1"></div>
+    <div class="radar-ring r2"></div>
+    <div class="radar-ring r3"></div>
+    <div class="radar-ring r4"></div>
+    <span class="radar-label l1 mono">25 km</span>
+    <span class="radar-label l2 mono">120 km</span>
+    <span class="radar-label l3 mono">400 km</span>
+    <div class="radar-sweep"></div>
+    <div class="radar-center"></div>
+    <div class="blip" style="top:41%;left:58%;"><div class="tag">7 km — CNC, Al 6061</div></div>
+    <div class="blip" style="top:63%;left:38%;animation-delay:.5s;"><div class="tag">19 km — Fabrication</div></div>
+    <div class="blip" style="top:30%;left:35%;animation-delay:1s;"><div class="tag">50 km — 3D Print, Nylon</div></div>
+    <div class="blip" style="top:70%;left:64%;animation-delay:1.6s;"><div class="tag">110 km — Injection Mold</div></div>
+    <div class="blip" style="top:20%;left:66%;animation-delay:2.1s;"><div class="tag">225 km — CNC, Titanium</div></div>
+    <div class="radar-caption mono">◦ Preview — how radius-matching will look once shops are onboarded</div>
+  </div>
+</section>
+
+<section class="brand-name" id="name">
+  <div class="section-head">
+    <span class="section-tag">THE NAME</span>
+    
+    <p class="lead name-equation">LOC <b>+</b> O <b>+</b> METRY <b>=</b> LOCOMETRY</p>
+  </div>
+  <div class="name-grid">
+    <div class="name-card">
+      <div class="name-frag">LOC</div>
+      <p class="name-mean">→ Location / Locate / Local</p>
+      <p class="name-desc">Find the right manufacturing capability where it is available.</p>
+    </div>
+    <div class="name-card">
+      <div class="name-frag">O</div>
+      <p class="name-mean">→ Open / On-demand / Opportunity / Orchestration</p>
+      <p class="name-desc">Connect available capacity with actual requirements.</p>
+    </div>
+    <div class="name-card">
+      <div class="name-frag">METRY</div>
+      <p class="name-mean">→ From -metry, meaning measurement / quantification</p>
+      <p class="name-desc">Capacity, capability, dimensions, specifications, precision and production parameters.</p>
+    </div>
+  </div>
+</section>
+
+<section class="why model" id="model">
+  <div class="section-head">
+    <span class="section-tag">THE MODEL</span>
+    <h2>Locate the capacity. Match the job. Get it made. Get it moved.</h2>
+    <p class="lead">Locometry connects businesses to industrial machine shop capacity — CNC, fabrication, machining, laser, injection molding, 3D printing, components — every shop vetted for capability, matched by distance first. Every job moves through four layers before it ships.</p>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <div class="dist mono">01 — LOCATE</div>
+      <h3>Find capacity nearby</h3>
+      <p>We map real manufacturing capacity — machines, materials, open slots — inside your radius, before anyone talks price.</p>
+    </div>
+    <div class="step">
+      <div class="dist mono">02 — MATCH</div>
+      <h3>Fit the job to the shop</h3>
+      <p>Drawings, tolerances, material, quantity and deadline get matched against what a shop can actually run — not just what its listing claims.</p>
+    </div>
+    <div class="step">
+      <div class="dist mono">03 — MAKE</div>
+      <h3>Coordinate production</h3>
+      <p>One part, one or many processes. We line up whichever shops need to touch it, so multi-step jobs move as one order, not five.</p>
+    </div>
+    <div class="step">
+      <div class="dist mono">04 — MOVE</div>
+      <h3>Get it to your door</h3>
+      <p>Pickup, consolidation and delivery, arranged once the part is ready — so "local" doesn't mean "your problem to collect."</p>
+    </div>
+  </div>
+</section>
+
+<section class="how" id="how">
+  <div class="section-head">
+    <span class="section-tag">HOW IT WORKS</span>
+    <h2>Three steps, one radius.</h2>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <div class="dist mono">STEP — UPLOAD</div>
+      <h3>Drop in a CAD file</h3>
+      <p>STEP, STL, SLDPRT, DXF and more — we take it from there: tolerances, material options, the right process.</p>
+    </div>
+    <div class="step">
+      <div class="dist mono">STEP — CONNECT</div>
+      <h3>We connect you with shops by distance</h3>
+      <p>We broadcast to vetted shops inside your radius first — and widen only if none can meet the job.</p>
+    </div>
+    <div class="step">
+      <div class="dist mono">STEP — SHIP</div>
+      <h3>Compare, order, drive over</h3>
+      <p>Quotes tagged with real distance and drive time. Pick on price, lead time, or the shop on your way home.</p>
+    </div>
+  </div>
+</section>
+
+<section class="tiers" id="tiers">
+  <div class="section-head">
+    <span class="section-tag">RADIUS TIERS</span>
+    <h2>Every job gets matched to a tier, then matched to a shop.</h2>
+  </div>
+
+  <div class="tier-row">
+    <div class="tier-radius">0–40 km</div>
+    <div class="tier-desc"><h4>Local</h4><p>Same-day pickup shops. Best for prototypes, rush jobs, and parts you want to inspect in person.</p></div>
+    <div class="tier-eta"><b>Same day</b>typical pickup</div>
+  </div>
+  <div class="tier-row">
+    <div class="tier-radius">40–250 km</div>
+    <div class="tier-desc"><h4>Regional</h4><p>A wider bench of processes and materials while keeping freight to a single ground hop.</p></div>
+    <div class="tier-eta"><b>1–3 days</b>typical ground</div>
+  </div>
+  <div class="tier-row">
+    <div class="tier-radius">250–1000 km</div>
+    <div class="tier-desc"><h4>Extended</h4><p>Opens up for specialty processes — injection molding, exotic alloys — that thin out at shorter radii.</p></div>
+    <div class="tier-eta"><b>3–5 days</b>typical ground</div>
+  </div>
+  <div class="tier-row">
+    <div class="tier-radius">1000+ km</div>
+    <div class="tier-desc"><h4>Nationwide</h4><p>Falls back to the full network only when nothing closer can hit spec, quantity, or certification.</p></div>
+    <div class="tier-eta"><b>5–8 days</b>freight-dependent</div>
+  </div>
+</section>
+
+<section class="why" id="why">
+  <div class="section-head">
+    <span class="section-tag">WHY PROXIMITY</span>
+    <h2>Some things only work when you can walk into the shop.</h2>
+    <p class="lead">A price-and-lead-time match can be automated from anywhere. These can't — they're the reason proximity is the point, not a filter.</p>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <div class="dist mono">WALK THE FLOOR</div>
+      <h3>See it before you commit</h3>
+      <p>Walk in, see the machines, meet the operator — before a rupee changes hands. Hard to do from a thousand kilometres away.</p>
+    </div>
+    <div class="step">
+      <div class="dist mono">IN-PERSON QA</div>
+      <h3>Audit in person, not by photo</h3>
+      <p>First-article inspection on-site instead of waiting on emailed CMM reports. Catch a tolerance issue in the room, not after freight.</p>
+    </div>
+    <div class="step">
+      <div class="dist mono">SENSITIVE WORK</div>
+      <h3>Defence &amp; SCOMET-aware sourcing</h3>
+      <p>Some jobs need a face-to-face relationship with the shop floor — not a certification checkbox in a quoting engine.</p>
+    </div>
+    <div class="step">
+      <div class="dist mono">RUSH JOBS</div>
+      <h3>Same-afternoon, not same-week</h3>
+      <p>When a prototype breaks on a Tuesday, "drive over this afternoon" beats "ships in three days" every time.</p>
+    </div>
+  </div>
+</section>
+
+<section class="metros" id="metros">
+  <div class="section-head">
+    <span class="section-tag">FOUNDING CLUSTERS</span>
+    <h2>We're going deep in a few manufacturing hubs first.</h2>
+    <p class="lead">Radius-matching only works with real supply density. Rather than launch thin everywhere, we're building density cluster by cluster — starting here.</p>
+  </div>
+  <div class="metro-grid">
+    <div class="metro-card open">
+      <div class="metro-status mono">● NOW ONBOARDING</div>
+      <h4>Coimbatore</h4>
+      <p>Sheet metal, foundry, and pump/motor fabrication corridor.</p>
+    </div>
+    <div class="metro-card open">
+      <div class="metro-status mono">● NOW ONBOARDING</div>
+      <h4>Chennai &amp; Sriperumbudur</h4>
+      <p>Automotive and aerospace-adjacent machining, rapid prototyping.</p>
+    </div>
+    <div class="metro-card next">
+      <div class="metro-status mono">○ NEXT UP</div>
+      <h4>Pune &amp; Western Maharashtra</h4>
+      <p>Deep CNC, stamping, and auto-component tooling bench.</p>
+    </div>
+    <div class="metro-card next">
+      <div class="metro-status mono">○ NEXT UP</div>
+      <h4>Delhi NCR — Faridabad &amp; Gurugram</h4>
+      <p>Hardware prototyping and low-volume production.</p>
+    </div>
+  </div>
+  <p class="metro-note">Not in one of these yet? Submit anyway — founding requests outside these clusters help us decide where to build density next.</p>
+</section>
+
+<div class="section-head" style="padding:9vh 6vw 24px;margin-bottom:0;border-top:1px solid var(--line);">
+  <span class="section-tag" style="margin-bottom:0;">WHY JOIN EARLY</span>
+</div>
+<section class="stats-band" id="network" style="border-top:none;">
+  <div><div class="num mono">0%</div><div class="lbl">platform fee for the founding cohort</div></div>
+  <div><div class="num mono">1st</div><div class="lbl">priority matching for early partners</div></div>
+  <div><div class="num mono">7</div><div class="lbl">in-scope categories at launch</div></div>
+  <div><div class="num mono">4</div><div class="lbl">founding clusters launching first</div></div>
+</section>
+
+<section class="request" id="request">
+  <div class="section-head">
+    <span class="section-tag">FOR BUSINESSES</span>
+    <h2>Send us the job. We'll connect you with shops nearby.</h2>
+    <p class="lead">Self-serve for work inside our in-scope categories — no sales call needed. Anything else still gets routed, just to a human first.</p>
+  </div>
+
+  <div class="request-grid">
+    <div class="request-info">
+      <div class="info-block">
+        <h4>In-scope categories</h4>
+        <ul class="chip-list">
+          <li>CNC</li>
+          <li>Fabrication</li>
+          <li>Machining</li>
+          <li>Laser</li>
+          <li>Injection Molding</li>
+          <li>3D Printing</li>
+          <li>Components</li>
+        </ul>
+      </div>
+      <div class="info-block">
+        <h4>What happens next</h4>
+        <ol class="mini-steps">
+          <li>Requirement is checked against in-scope categories automatically.</li>
+          <li>In-scope jobs join the founding queue, matched the moment your radius goes live.</li>
+          <li>Custom or out-of-scope jobs are scoped by a Locometry engineer first, live network or not.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div>
+      <form class="form-card" id="requestForm">
+        <div class="form-row two">
+          <div class="field">
+            <label for="reqCompany">Company name</label>
+            <input type="text" id="reqCompany" required>
+          </div>
+          <div class="field">
+            <label for="reqEmail">Work email</label>
+            <input type="email" id="reqEmail" required>
+          </div>
+        </div>
+
+        <div class="form-row two">
+          <div class="field">
+            <label for="reqCategory">Work category</label>
+            <select id="reqCategory" required>
+              <option value="" disabled selected>Select category</option>
+              <option value="cnc">CNC</option>
+              <option value="fabrication">Fabrication</option>
+              <option value="machining">Machining</option>
+              <option value="laser">Laser</option>
+              <option value="molding">Injection Molding</option>
+              <option value="additive">3D Printing</option>
+              <option value="components">Components</option>
+              <option value="other">Other / Custom Process</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="reqQty">Quantity</label>
+            <input type="number" id="reqQty" min="1" value="1">
+          </div>
+        </div>
+
+        <div class="field custom-field" id="customCategoryField" hidden>
+          <label for="reqCustom">Describe the process / requirement</label>
+          <textarea id="reqCustom" placeholder="e.g. vacuum-form tooling for a low-volume prototype run"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="reqMetro">Closest founding cluster</label>
+          <select id="reqMetro">
+            <option value="coimbatore">Coimbatore</option>
+            <option value="chennai">Chennai &amp; Sriperumbudur</option>
+            <option value="pune">Pune &amp; Western Maharashtra</option>
+            <option value="delhincr">Delhi NCR — Faridabad &amp; Gurugram</option>
+            <option value="other">Not listed yet</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="reqRadius">Preferred match radius</label>
+          <select id="reqRadius">
+            <option value="local">Local — 0–40 km</option>
+            <option value="regional" selected>Regional — 40–250 km</option>
+            <option value="extended">Extended — 250–1000 km</option>
+            <option value="nationwide">Nationwide — 1000+ km</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="reqDetails">Requirement details</label>
+          <textarea id="reqDetails" placeholder="Material, tolerances, finish, certifications, target lead time..." required></textarea>
+        </div>
+
+        <div class="field">
+          <label>Upload drawing / CAD / spec document</label>
+          <div class="dropzone" id="dropzone">
+            <input type="file" id="fileInput" hidden accept=".pdf,.step,.stp,.stl,.dxf,.sldprt,.igs,.iges,.png,.jpg">
+            <div class="dz-text">Drag a file here or <span class="dz-browse">browse</span></div>
+            <div class="dz-filename" id="dzFilename"></div>
+          </div>
+        </div>
+
+        <div class="scope-badge" id="scopeBadge"><span class="sb-dot"></span><span id="scopeBadgeText"></span></div>
+
+        <button type="submit" class="btn-primary full">Submit requirement →</button>
+      </form>
+
+      <div class="confirm-panel" id="requestConfirm" hidden>
+        <div class="confirm-ref mono" id="requestRef"></div>
+        <h3>Requirement received.</h3>
+        <p>You're in the founding queue. As we onboard shops in your radius, you'll be matched first — we'll email you, no need to check back.</p>
+        <div class="confirm-meta" id="requestMeta"></div>
+        <button class="btn-secondary" id="requestReset">Submit another requirement</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="shops" id="shops">
+  <div class="section-head">
+    <span class="section-tag">FOR MACHINE SHOPS</span>
+    <h2>Tell us what you run. We'll route jobs your way.</h2>
+    <p class="lead">A simple interest flow, not a long application. Submit your capabilities — a real person reaches out to get you live.</p>
+  </div>
+
+  <div class="shops-grid">
+    <div class="shops-info">
+      <div class="info-block">
+        <h4>Capabilities we're onboarding</h4>
+        <ul class="chip-list">
+          <li>CNC</li>
+          <li>Fabrication</li>
+          <li>Machining</li>
+          <li>Laser</li>
+          <li>Injection Molding</li>
+          <li>3D Printing</li>
+          <li>Components</li>
+        </ul>
+      </div>
+      <div class="info-block">
+        <h4>How onboarding works</h4>
+        <div class="pipeline" id="pipeline">
+          <div class="pipe-step" id="pipeStep1" data-step="1">
+            <div class="pipe-num mono">01 · SUBMITTED</div>
+            <h4>Shop submits interest</h4>
+            <p>Capabilities, location, and capacity — takes about two minutes.</p>
+          </div>
+          <div class="pipe-arrow">→</div>
+          <div class="pipe-step" id="pipeStep2" data-step="2">
+            <div class="pipe-num mono">02 · NOTIFIED</div>
+            <h4>Locometry is notified</h4>
+            <p>Your submission lands directly with the partner onboarding team.</p>
+          </div>
+          <div class="pipe-arrow">→</div>
+          <div class="pipe-step" id="pipeStep3" data-step="3">
+            <div class="pipe-num mono">03 · REVIEWED</div>
+            <h4>Partner team reviews &amp; onboards</h4>
+            <p>We verify capabilities and coverage radius, then get you live.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <form class="form-card" id="shopForm">
+        <div class="form-row two">
+          <div class="field">
+            <label for="shopName">Shop name</label>
+            <input type="text" id="shopName" required>
+          </div>
+          <div class="field">
+            <label for="shopZip">Location (PIN code)</label>
+            <input type="text" id="shopZip" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" placeholder="e.g. 411019" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="shopMetro">Closest founding cluster</label>
+          <select id="shopMetro">
+            <option value="coimbatore">Coimbatore</option>
+            <option value="chennai">Chennai &amp; Sriperumbudur</option>
+            <option value="pune">Pune &amp; Western Maharashtra</option>
+            <option value="delhincr">Delhi NCR — Faridabad &amp; Gurugram</option>
+            <option value="other">Not listed yet</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Capabilities</label>
+          <div class="capability-toggles" id="capToggles">
+            <label class="cap-pill"><input type="checkbox" value="CNC">CNC</label>
+            <label class="cap-pill"><input type="checkbox" value="Fabrication">Fabrication</label>
+            <label class="cap-pill"><input type="checkbox" value="Machining">Machining</label>
+            <label class="cap-pill"><input type="checkbox" value="Laser">Laser</label>
+            <label class="cap-pill"><input type="checkbox" value="Injection Molding">Injection Molding</label>
+            <label class="cap-pill"><input type="checkbox" value="3D Printing">3D Printing</label>
+            <label class="cap-pill"><input type="checkbox" value="Components">Components</label>
+          </div>
+        </div>
+
+        <div class="form-row two">
+          <div class="field">
+            <label for="shopCapacity">Monthly capacity</label>
+            <select id="shopCapacity">
+              <option>Under 50 jobs</option>
+              <option>50–200 jobs</option>
+              <option>200+ jobs</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="shopEmail">Contact email</label>
+            <input type="email" id="shopEmail" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Certifications, sample work &amp; machine documents <span class="optional-tag">(optional — multiple files)</span></label>
+          <div class="dropzone" id="shopDropzone">
+            <input type="file" id="shopFileInput" hidden multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
+            <div class="dz-text">Drag files here or <span class="dz-browse">browse</span></div>
+            <div class="dz-hint">ISO / AS9100 certs, photos of past work, machine spec sheets — PDF, DOC, JPG, PNG</div>
+          </div>
+          <ul class="file-list" id="shopFileList"></ul>
+        </div>
+
+        <div class="field">
+          <label for="shopNotes">Anything else we should know</label>
+          <textarea id="shopNotes" placeholder="Certifications, materials, typical lead times..."></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary full">Submit interest →</button>
+      </form>
+
+      <div class="confirm-panel" id="shopConfirm" hidden>
+        <div class="confirm-ref mono" id="shopRef"></div>
+        <h3>Interest submitted.</h3>
+        <p>We'll review your capabilities against demand in your radius. Expect an email within 2 business days.</p>
+        <div class="confirm-meta" id="shopMeta"></div>
+        <button class="btn-secondary" id="shopReset">Submit another shop</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-foot">
+  <h2>Help us build the network — as a founding business or shop.</h2>
+  <div class="hero-ctas" style="justify-content:center;">
+    <a class="btn-primary" href="#request">Submit a job →</a>
+    <a class="btn-secondary" href="#shops">Register your shop →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">
+    <svg width="24" height="24" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+      <rect width="64" height="64" rx="13" fill="#16273F" stroke="#3A5170" stroke-width="1.5"/>
+      <g transform="translate(18,48) rotate(-14)">
+        <circle cx="0" cy="0" r="23" fill="none" stroke="#8FA3B8" stroke-width="1.4" opacity="0.45" stroke-dasharray="2.4 3.2"/>
+        <circle cx="0" cy="0" r="14" fill="none" stroke="#8FA3B8" stroke-width="1.3" opacity="0.35"/>
+        <line x1="0" y1="0" x2="0" y2="-30" stroke="#EDEFF2" stroke-width="4.8" stroke-linecap="butt"/>
+        <line x1="0" y1="0" x2="26" y2="0" stroke="#EDEFF2" stroke-width="4.8" stroke-linecap="butt"/>
+        <path d="M 3.74,-17.61 A 18,18 0 0 1 17.61,-3.74" fill="none" stroke="#FF8A3D" stroke-width="3.4" stroke-linecap="round"/>
+        <polygon points="0,-39 5.5,-30 -5.5,-30" fill="#FF8A3D"/>
+        <polygon points="34,0 26,-4.4 26,4.4" fill="#FF8A3D"/>
+        <circle cx="0" cy="0" r="3.4" fill="#16273F"/>
+        <circle cx="0" cy="0" r="2.8" fill="#EDEFF2"/>
+      </g>
+    </svg>
+    LOCOMETRY © 2026
+  </div>
+  <div class="mono">RADIUS-MATCHED MANUFACTURING</div>
+</footer>
+
+<script>
+  // ---------- helpers ----------
+  function refId(prefix){
+    return prefix + '-' + Math.floor(100000 + Math.random()*900000);
+  }
+  const CATEGORY_LABELS = {
+    cnc:'CNC', fabrication:'Fabrication', machining:'Machining', laser:'Laser',
+    molding:'Injection Molding', additive:'3D Printing', components:'Components',
+    other:'Other / Custom Process'
+  };
+  const RADIUS_LABELS = {
+    local:'Local — 0–40 km', regional:'Regional — 40–250 km',
+    extended:'Extended — 250–1000 km', nationwide:'Nationwide — 1000+ km'
+  };
+  const METRO_LABELS = {
+    pune:'Pune & Western Maharashtra', chennai:'Chennai & Sriperumbudur',
+    coimbatore:'Coimbatore', delhincr:'Delhi NCR — Faridabad & Gurugram', other:'Not listed yet'
+  };
+
+  // ---------- business request form ----------
+  const reqCategory = document.getElementById('reqCategory');
+  const customField = document.getElementById('customCategoryField');
+  const reqCustom = document.getElementById('reqCustom');
+  const scopeBadge = document.getElementById('scopeBadge');
+  const scopeBadgeText = document.getElementById('scopeBadgeText');
+
+  reqCategory.addEventListener('change', () => {
+    const isOther = reqCategory.value === 'other';
+    customField.hidden = !isOther;
+    reqCustom.required = isOther;
+
+    scopeBadge.classList.add('show');
+    if(isOther){
+      scopeBadge.classList.remove('in-scope');
+      scopeBadge.classList.add('flagged');
+      scopeBadgeText.textContent = 'Outside standard categories — flagged for manual scoping by a Locometry engineer';
+    } else {
+      scopeBadge.classList.remove('flagged');
+      scopeBadge.classList.add('in-scope');
+      scopeBadgeText.textContent = 'In-scope category — added to the founding match queue for your radius';
+    }
+  });
+
+  // dropzone
+  const dropzone = document.getElementById('dropzone');
+  const fileInput = document.getElementById('fileInput');
+  const dzFilename = document.getElementById('dzFilename');
+
+  dropzone.addEventListener('click', () => fileInput.click());
+  fileInput.addEventListener('change', () => {
+    if(fileInput.files.length) dzFilename.textContent = '✓ ' + fileInput.files[0].name;
+  });
+  ['dragover','dragenter'].forEach(evt => dropzone.addEventListener(evt, e => {
+    e.preventDefault(); dropzone.classList.add('drag');
+  }));
+  ['dragleave','drop'].forEach(evt => dropzone.addEventListener(evt, e => {
+    e.preventDefault(); dropzone.classList.remove('drag');
+  }));
+  dropzone.addEventListener('drop', e => {
+    if(e.dataTransfer.files.length){
+      fileInput.files = e.dataTransfer.files;
+      dzFilename.textContent = '✓ ' + e.dataTransfer.files[0].name;
+    }
+  });
+
+  // submit
+  const requestForm = document.getElementById('requestForm');
+  const requestConfirm = document.getElementById('requestConfirm');
+  const requestMeta = document.getElementById('requestMeta');
+  const requestRef = document.getElementById('requestRef');
+
+  requestForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const category = reqCategory.value === 'other'
+      ? (reqCustom.value.trim() || 'Custom process (unspecified)')
+      : CATEGORY_LABELS[reqCategory.value];
+    const fileName = fileInput.files.length ? fileInput.files[0].name : 'No file attached';
+    const ref = refId('LOC-REQ');
+
+    requestMeta.innerHTML = `
+      <div><span>Reference</span><span>${ref}</span></div>
+      <div><span>Category</span><span>${category}</span></div>
+      <div><span>Quantity</span><span>${document.getElementById('reqQty').value}</span></div>
+      <div><span>Cluster</span><span>${METRO_LABELS[document.getElementById('reqMetro').value]}</span></div>
+      <div><span>Match radius</span><span>${RADIUS_LABELS[document.getElementById('reqRadius').value]}</span></div>
+      <div><span>Document</span><span>${fileName}</span></div>
+      <div><span>Status</span><span>${reqCategory.value === 'other' ? 'Pending scoping review' : 'Queued — founding cohort'}</span></div>
+    `;
+    requestRef.textContent = 'REF ' + ref;
+    requestForm.hidden = true;
+    requestConfirm.hidden = false;
+    requestConfirm.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+
+  document.getElementById('requestReset').addEventListener('click', () => {
+    requestForm.reset();
+    customField.hidden = true;
+    scopeBadge.classList.remove('show');
+    dzFilename.textContent = '';
+    requestConfirm.hidden = true;
+    requestForm.hidden = false;
+    requestForm.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+
+  // ---------- machine shop capability pills ----------
+  document.querySelectorAll('.cap-pill').forEach(pill => {
+    const input = pill.querySelector('input');
+    pill.addEventListener('click', e => {
+      if(e.target.tagName !== 'INPUT') input.checked = !input.checked;
+      pill.classList.toggle('checked', input.checked);
+    });
+  });
+
+  // ---------- shop document upload (certifications / sample work / machine docs) ----------
+  const shopDropzone = document.getElementById('shopDropzone');
+  const shopFileInput = document.getElementById('shopFileInput');
+  const shopFileListEl = document.getElementById('shopFileList');
+  let shopFiles = [];
+
+  function renderShopFileList(){
+    shopFileListEl.innerHTML = shopFiles.map((f, i) => `
+      <li><span>📎 ${f.name}</span><button type="button" class="file-remove" data-index="${i}" aria-label="Remove file">✕</button></li>
+    `).join('');
+    shopFileListEl.querySelectorAll('.file-remove').forEach(btn => {
+      btn.addEventListener('click', () => {
+        shopFiles.splice(Number(btn.dataset.index), 1);
+        renderShopFileList();
+      });
+    });
+  }
+
+  function addShopFiles(fileList){
+    Array.from(fileList).forEach(f => {
+      if(!shopFiles.some(x => x.name === f.name && x.size === f.size)) shopFiles.push(f);
+    });
+    renderShopFileList();
+  }
+
+  shopDropzone.addEventListener('click', () => shopFileInput.click());
+  shopFileInput.addEventListener('change', () => {
+    addShopFiles(shopFileInput.files);
+    shopFileInput.value = '';
+  });
+  ['dragover','dragenter'].forEach(evt => shopDropzone.addEventListener(evt, e => {
+    e.preventDefault(); shopDropzone.classList.add('drag');
+  }));
+  ['dragleave','drop'].forEach(evt => shopDropzone.addEventListener(evt, e => {
+    e.preventDefault(); shopDropzone.classList.remove('drag');
+  }));
+  shopDropzone.addEventListener('drop', e => {
+    if(e.dataTransfer.files.length) addShopFiles(e.dataTransfer.files);
+  });
+
+  // ---------- shop interest flow ----------
+  const shopForm = document.getElementById('shopForm');
+  const shopConfirm = document.getElementById('shopConfirm');
+  const shopMeta = document.getElementById('shopMeta');
+  const shopRef = document.getElementById('shopRef');
+  const pipeStep1 = document.getElementById('pipeStep1');
+  const pipeStep2 = document.getElementById('pipeStep2');
+  const pipeStep3 = document.getElementById('pipeStep3');
+
+  shopForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const caps = Array.from(document.querySelectorAll('#capToggles input:checked')).map(i => i.value);
+    const ref = refId('LOC-SHOP');
+    const docsSummary = shopFiles.length
+      ? `${shopFiles.length} file${shopFiles.length > 1 ? 's' : ''} — ${shopFiles.map(f => f.name).join(', ')}`
+      : 'None attached';
+
+    // animate pipeline: submitted -> notified -> under review
+    pipeStep1.classList.add('done');
+    setTimeout(() => pipeStep2.classList.add('active'), 350);
+    setTimeout(() => { pipeStep2.classList.remove('active'); pipeStep2.classList.add('done'); pipeStep3.classList.add('active'); }, 1400);
+
+    shopMeta.innerHTML = `
+      <div><span>Reference</span><span>${ref}</span></div>
+      <div><span>Shop</span><span>${document.getElementById('shopName').value}</span></div>
+      <div><span>Location</span><span>${document.getElementById('shopZip').value}</span></div>
+      <div><span>Cluster</span><span>${METRO_LABELS[document.getElementById('shopMetro').value]}</span></div>
+      <div><span>Capabilities</span><span>${caps.length ? caps.join(', ') : 'Not specified'}</span></div>
+      <div><span>Capacity</span><span>${document.getElementById('shopCapacity').value}</span></div>
+      <div><span>Documents</span><span>${docsSummary}</span></div>
+      <div><span>Status</span><span>Notification sent to partner team</span></div>
+    `;
+    shopRef.textContent = 'REF ' + ref;
+    shopForm.hidden = true;
+    shopConfirm.hidden = false;
+    shopConfirm.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+
+  document.getElementById('shopReset').addEventListener('click', () => {
+    shopForm.reset();
+    document.querySelectorAll('.cap-pill').forEach(p => p.classList.remove('checked'));
+    shopFiles = [];
+    renderShopFileList();
+    [pipeStep1, pipeStep2, pipeStep3].forEach(s => s.classList.remove('active','done'));
+    shopConfirm.hidden = true;
+    shopForm.hidden = false;
+    shopForm.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+  // ---------- mobile hamburger menu ----------
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const menuBackdrop = document.getElementById('menuBackdrop');
+
+  function openMobileMenu(){
+    hamburgerBtn.classList.add('open');
+    mobileMenu.classList.add('open');
+    menuBackdrop.classList.add('open');
+    hamburgerBtn.setAttribute('aria-expanded','true');
+    document.body.classList.add('no-scroll');
+  }
+  function closeMobileMenu(){
+    hamburgerBtn.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    menuBackdrop.classList.remove('open');
+    hamburgerBtn.setAttribute('aria-expanded','false');
+    document.body.classList.remove('no-scroll');
+  }
+  hamburgerBtn.addEventListener('click', () => {
+    mobileMenu.classList.contains('open') ? closeMobileMenu() : openMobileMenu();
+  });
+  menuBackdrop.addEventListener('click', closeMobileMenu);
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobileMenu));
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') closeMobileMenu(); });
+  window.addEventListener('resize', () => { if(window.innerWidth > 860) closeMobileMenu(); });
+
+  // THEME TOGGLE
+  const themeToggle = document.getElementById('themeToggle');
+  const rootEl = document.documentElement;
+  themeToggle.addEventListener('click', () => {
+    const isLight = rootEl.getAttribute('data-theme') === 'light';
+    if(isLight){
+      rootEl.removeAttribute('data-theme');
+      themeToggle.setAttribute('aria-label','Switch to light theme');
+      try{ localStorage.setItem('locometry-theme','dark'); }catch(e){}
+    }else{
+      rootEl.setAttribute('data-theme','light');
+      themeToggle.setAttribute('aria-label','Switch to dark theme');
+      try{ localStorage.setItem('locometry-theme','light'); }catch(e){}
+    }
+  });
+  if(rootEl.getAttribute('data-theme') === 'light'){
+    themeToggle.setAttribute('aria-label','Switch to dark theme');
+  }
+</script>
+
+</body>
+</html>
