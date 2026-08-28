@@ -458,8 +458,7 @@
     gap:16px;flex-wrap:wrap;
     padding:26px 6vw;color:var(--steel);font-size:13px;
   }
-  .footer-brand{display:flex;align-items:center;gap:9px;color:var(--paper);font-weight:700;}
-  .footer-brand svg{display:block;flex-shrink:0;}
+  .footer-brand{display:flex;align-items:center;color:var(--steel);font-weight:400;font-size:13px;}
   .footer-legal{display:flex;align-items:center;gap:8px;color:var(--steel);font-size:13px;}
   .footer-legal a{color:var(--steel);transition:color .2s ease;white-space:nowrap;}
   .footer-legal a:hover{color:var(--paper);}
@@ -470,11 +469,8 @@
       flex-wrap:nowrap;
       padding:16px 4vw;
       gap:3vw;
-      font-size:clamp(9px,3vw,13px);
     }
-    .footer-brand{gap:6px;white-space:nowrap;}
-    .footer-brand svg{display:block;flex-shrink:0;width:20px;height:20px;}
-    .footer-brand span{font-size:clamp(9px,3vw,13px);white-space:nowrap;}
+    .footer-brand{font-size:clamp(9px,3vw,12px);white-space:nowrap;}
     .footer-legal{gap:5px;font-size:clamp(9px,3vw,13px);flex-shrink:0;white-space:nowrap;}
   }
 
@@ -1104,21 +1100,7 @@
 
 <footer>
   <div class="footer-brand">
-    <svg width="24" height="24" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-      <rect width="64" height="64" rx="13" fill="#16273F" stroke="#3A5170" stroke-width="1.5"/>
-      <g transform="translate(18,48) rotate(-14)">
-        <circle cx="0" cy="0" r="23" fill="none" stroke="#8FA3B8" stroke-width="1.4" opacity="0.45" stroke-dasharray="2.4 3.2"/>
-        <circle cx="0" cy="0" r="14" fill="none" stroke="#8FA3B8" stroke-width="1.3" opacity="0.35"/>
-        <line x1="0" y1="0" x2="0" y2="-30" stroke="#EDEFF2" stroke-width="4.8" stroke-linecap="butt"/>
-        <line x1="0" y1="0" x2="26" y2="0" stroke="#EDEFF2" stroke-width="4.8" stroke-linecap="butt"/>
-        <path d="M 3.74,-17.61 A 18,18 0 0 1 17.61,-3.74" fill="none" stroke="#FF8A3D" stroke-width="3.4" stroke-linecap="round"/>
-        <polygon points="0,-39 5.5,-30 -5.5,-30" fill="#FF8A3D"/>
-        <polygon points="34,0 26,-4.4 26,4.4" fill="#FF8A3D"/>
-        <circle cx="0" cy="0" r="3.4" fill="#16273F"/>
-        <circle cx="0" cy="0" r="2.8" fill="#EDEFF2"/>
-      </g>
-    </svg>
-    <span>© Copyright 2026</span>
+    <span>LOCOMETRY<sup>®</sup> <span class="logo-tag">MACHINE WORKS</span> © 2026</span>
   </div>
   <div class="footer-legal">
     <a href="#privacy">Privacy Policy</a>
