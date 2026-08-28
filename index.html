@@ -461,9 +461,22 @@
   .footer-brand{display:flex;align-items:center;gap:9px;color:var(--paper);font-weight:700;}
   .footer-brand svg{display:block;flex-shrink:0;}
   .footer-legal{display:flex;align-items:center;gap:8px;color:var(--steel);font-size:13px;}
-  .footer-legal a{color:var(--steel);transition:color .2s ease;}
+  .footer-legal a{color:var(--steel);transition:color .2s ease;white-space:nowrap;}
   .footer-legal a:hover{color:var(--paper);}
   .footer-legal .sep{color:var(--line);}
+
+  @media (max-width:600px){
+    footer{
+      flex-wrap:nowrap;
+      padding:16px 4vw;
+      gap:3vw;
+      font-size:clamp(9px,3vw,13px);
+    }
+    .footer-brand{gap:6px;white-space:nowrap;}
+    .footer-brand svg{display:block;flex-shrink:0;width:20px;height:20px;}
+    .footer-brand span{font-size:clamp(9px,3vw,13px);white-space:nowrap;}
+    .footer-legal{gap:5px;font-size:clamp(9px,3vw,13px);flex-shrink:0;white-space:nowrap;}
+  }
 
   @media (max-width:1150px){
     nav{display:none;}
@@ -1105,7 +1118,7 @@
         <circle cx="0" cy="0" r="2.8" fill="#EDEFF2"/>
       </g>
     </svg>
-    <span>© Copyright 2026 . Locometry<sup>®</sup> Machine Works</span>
+    <span>© Copyright 2026</span>
   </div>
   <div class="footer-legal">
     <a href="#privacy">Privacy Policy</a>
