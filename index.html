@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Locometry — Machine Works | Locate the capacity. Get the job matched, made and moved.</title>
-<meta name="description" content="Need something manufactured? Send us the requirement — Locometry finds the right industrial machine shop capacity, and gets it produced.">
+<title>Locometry — Machine Works | Get the job matched, made and moved.</title>
+<meta name="description" content="Need something designed, manufactured, repaired or assembled? Send us the requirement — Locometry finds the right industrial machine shop capacity, and gets it produced.">
 
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHJ4PSIxMyIgZmlsbD0iIzE2MjczRiIgc3Ryb2tlPSIjM0E1MTcwIiBzdHJva2Utd2lkdGg9IjEuNSIvPgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDE4LDQ4KSByb3RhdGUoLTE0KSI+CiAgICA8Y2lyY2xlIGN4PSIwIiBjeT0iMCIgcj0iMjMiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzhGQTNCOCIgc3Ryb2tlLXdpZHRoPSIxLjQiIG9wYWNpdHk9IjAuNDUiIHN0cm9rZS1kYXNoYXJyYXk9IjIuNCAzLjIiLz4KICAgIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIxNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOEZBM0I4IiBzdHJva2Utd2lkdGg9IjEuMyIgb3BhY2l0eT0iMC4zNSIvPgogICAgPGxpbmUgeDE9IjAiIHkxPSIwIiB4Mj0iMCIgeTI9Ii0zMCIgc3Ryb2tlPSIjRURFRkYyIiBzdHJva2Utd2lkdGg9IjQuOCIgc3Ryb2tlLWxpbmVjYXA9ImJ1dHQiLz4KICAgIDxsaW5lIHgxPSIwIiB5MT0iMCIgeDI9IjMxIiB5Mj0iMCIgc3Ryb2tlPSIjRURFRkYyIiBzdHJva2Utd2lkdGg9IjQuOCIgc3Ryb2tlLWxpbmVjYXA9ImJ1dHQiLz4KICAgIDxwYXRoIGQ9Ik0gMy43NCwtMTcuNjEgQSAxOCwxOCAwIDAgMSAxNy42MSwtMy43NCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRkY4QTNEIiBzdHJva2Utd2lkdGg9IjMuNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgICA8cG9seWdvbiBwb2ludHM9IjAsLTM5IDUuNSwtMzAgLTUuNSwtMzAiIGZpbGw9IiNGRjhBM0QiLz4KICAgIDxwb2x5Z29uIHBvaW50cz0iMzksMCAzMSwtNC40IDMxLDQuNCIgZmlsbD0iI0ZGOEEzRCIvPgogICAgPGNpcmNsZSBjeD0iMCIgY3k9IjAiIHI9IjMuNCIgZmlsbD0iIzE2MjczRiIvPgogICAgPGNpcmNsZSBjeD0iMCIgY3k9IjAiIHI9IjIuOCIgZmlsbD0iI0VERUZGMiIvPgogIDwvZz4KPC9zdmc+Cg==">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,6 +18,7 @@
     --steel:#8FA3B8;
     --paper:#EDEFF2;
     --line: rgba(143,163,184,0.18);
+    --radar-line: rgba(143,163,184,0.4);
     --signal:#4ADE80;
     color-scheme:dark;
   }
@@ -29,6 +30,7 @@
     --steel:#5B6B7D;
     --paper:#131E2E;
     --line: rgba(19,30,46,0.12);
+    --radar-line: rgba(19,30,46,0.32);
     --signal:#1A9B52;
     color-scheme:light;
   }
@@ -207,7 +209,7 @@
     margin-bottom:34px;
   }
   .radar-ring{
-    position:absolute;border:1px solid var(--line);border-radius:50%;
+    position:absolute;border:1px solid var(--radar-line);border-radius:50%;
     top:50%;left:50%;transform:translate(-50%,-50%);
   }
   .radar-ring.r1{width:30%;height:30%;}
@@ -303,6 +305,15 @@
   .metro-card.open .metro-status{color:var(--signal);}
 
   .model .dist{margin-bottom:6px;}
+  .step-underneath{
+    margin-top:16px;padding-top:14px;
+    border-top:1px solid var(--line);
+    font-family:'JetBrains Mono',monospace;
+    font-size:10.5px;letter-spacing:0.05em;
+    text-transform:uppercase;
+    color:var(--steel);
+    opacity:0.85;
+  }
   .metro-card h4{font-size:17px;margin-bottom:8px;font-family:'Space Grotesk',sans-serif;}
   .metro-card p{color:var(--steel);font-size:13.5px;}
   .metro-note{color:var(--steel);font-size:13.5px;max-width:640px;}
@@ -310,16 +321,6 @@
 
   /* PROXIMITY TIERS */
   .tiers{border-top:1px solid var(--line);}
-  .tier-row{
-    display:grid;grid-template-columns:140px 1fr 200px;gap:24px;
-    align-items:center;padding:26px 0;border-bottom:1px solid var(--line);
-  }
-  .tier-row:first-of-type{border-top:1px solid var(--line);}
-  .tier-radius{font-family:'JetBrains Mono',monospace;font-size:15px;color:var(--amber);}
-  .tier-desc h4{font-size:17px;margin-bottom:6px;font-family:'Space Grotesk',sans-serif;}
-  .tier-desc p{color:var(--steel);font-size:14px;}
-  .tier-eta{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--steel);text-align:right;}
-  .tier-eta b{color:var(--paper);display:block;font-size:16px;}
 
   /* NETWORK STATS */
   .stats-band{
@@ -485,8 +486,6 @@
     .steps{grid-template-columns:1fr;}
     .stats-band{grid-template-columns:repeat(2,1fr);}
     .stats-band div:nth-child(3){border-left:none;}
-    .tier-row{grid-template-columns:1fr;gap:8px;}
-    .tier-eta{text-align:left;}
     .request-grid{grid-template-columns:1fr;gap:40px;}
     .shops-grid{grid-template-columns:1fr;gap:40px;}
     .form-row.two{grid-template-columns:1fr;}
@@ -524,7 +523,7 @@
   /* THEME TOGGLE */
   header, .mobile-menu, .prelaunch-bar, .step, .metro-card, .form-card,
   .confirm-panel, input, select, textarea, .file-list li, .pipe-step,
-  .cap-pill, .dropzone, .tier-row, .stats-band, .stats-band div, footer,
+  .cap-pill, .dropzone, .stats-band, .stats-band div, footer,
   .blip .tag, .steps, .metro-grid{
     transition:background-color .25s ease, border-color .25s ease, color .25s ease;
   }
@@ -630,12 +629,12 @@
 <section class="hero" id="home">
   <div>
     <span class="eyebrow">● PRE-LAUNCH — industrial machine shops</span>
-    <h1>Machines, minutes away.<br class="hero-br"> The nearest shop <em>to make it</em>.</h1>
+    <h1>Machines, minutes away.<br class="hero-br"> <em>Match it, Make it and Move it.</em></h1>
     <div class="hero-pitch">
       <p class="q">"Need something manufactured?</p>
       <p class="a">Send us the requirement. We'll find the right capacity and get it produced."</p>
     </div>
-    <p class="sub">Industrial machine shops — CNC, fabrication, machining, laser, injection molding, 3D printing, components — every shop vetted for capability, matched by distance first. Cluster by cluster across India's manufacturing belts.</p>
+    <p class="sub">Industrial machine shops — CNC, fabrication, machining, laser, injection molding, 3D printing, design, repair, assembly — every shop vetted for capability, matched by distance first. Cluster by cluster across India's manufacturing belts.</p>
     <div class="hero-ctas">
       <a class="btn-primary" href="#request">Submit a founding job →</a>
       <a class="btn-secondary" href="#shops">Partner as a machine shop</a>
@@ -656,12 +655,12 @@
     <span class="radar-label l3 mono">400 km</span>
     <div class="radar-sweep"></div>
     <div class="radar-center"></div>
-    <div class="blip" style="top:41%;left:58%;"><div class="tag">19 km — CNC, Al 6061</div></div>
+    <div class="blip" style="top:41%;left:58%;"><div class="tag">19 km — Design, CAD</div></div>
     <div class="blip" style="top:63%;left:38%;animation-delay:.5s;"><div class="tag">30 km — Fabrication</div></div>
     <div class="blip" style="top:30%;left:35%;animation-delay:1s;"><div class="tag">50 km — 3D Print, Nylon</div></div>
-    <div class="blip" style="top:70%;left:64%;animation-delay:1.6s;"><div class="tag">70 km — Injection Mold</div></div>
+    <div class="blip" style="top:70%;left:64%;animation-delay:1.6s;"><div class="tag">70 km — Assembly</div></div>
     <div class="blip" style="top:20%;left:66%;animation-delay:2.1s;"><div class="tag">225 km — CNC, Titanium</div></div>
-    <div class="radar-caption mono">◦ Preview — radius-matching for onboarded shops</div>
+    <div class="radar-caption mono">◦ Preview — radius-matching across design, make &amp; repair scopes</div>
   </div>
 </section>
 
@@ -690,32 +689,30 @@
   </div>
 </section>
 
-<section class="why model" id="model">
+<section class="model" id="model">
   <div class="section-head">
     <span class="section-tag">THE MODEL</span>
-    <h2>Locate the capacity. Get the job matched, made and moved.</h2>
-    <p class="lead">Locometry connects businesses to industrial machine shop capacity — CNC, fabrication, machining, laser, injection molding, 3D printing, components — every shop vetted for capability, matched by distance first. Every job moves through four layers before it ships.</p>
+    <h2>Get the job matched, made and moved.</h2>
+    <p class="lead">Locometry connects businesses to industrial machine shop capacity — CNC, fabrication, machining, laser, injection molding, 3D printing, design, repair, assembly — every shop vetted for capability, matched by distance first. Every job moves through three layers before it ships.</p>
   </div>
   <div class="steps">
     <div class="step">
-      <div class="dist mono">01 — LOCATE</div>
-      <h3>Find capacity nearby</h3>
-      <p>We map real manufacturing capacity — machines, materials, open slots — inside your radius, before anyone talks price.</p>
-    </div>
-    <div class="step">
-      <div class="dist mono">02 — MATCH</div>
+      <div class="dist mono">01 — MATCH</div>
       <h3>Fit the job to the shop</h3>
-      <p>Drawings, tolerances, material, quantity and deadline get matched against what a shop can actually run — not just what its listing claims.</p>
+      <p>Drawings, tolerances, material, quantity and deadline get matched against what a shop can actually run nearby — not just what its listing claims.</p>
+      <div class="step-underneath">People · Materials · Machines · Makers · Movers</div>
     </div>
     <div class="step">
-      <div class="dist mono">03 — MAKE</div>
+      <div class="dist mono">02 — MAKE</div>
       <h3>Coordinate production</h3>
       <p>One part, one or many processes. We line up whichever shops need to touch it, so multi-step jobs move as one order, not five.</p>
+      <div class="step-underneath">Design · Machine · Fabricate · Repair · Assemble</div>
     </div>
     <div class="step">
-      <div class="dist mono">04 — MOVE</div>
+      <div class="dist mono">03 — MOVE</div>
       <h3>Get it to your door</h3>
       <p>Pickup, consolidation and delivery, arranged once the part is ready.</p>
+      <div class="step-underneath">Pickup · Transport · Delivery · Deployment</div>
     </div>
   </div>
 </section>
@@ -723,23 +720,23 @@
 <section class="how" id="how">
   <div class="section-head">
     <span class="section-tag">HOW IT WORKS</span>
-    <h2>Three steps, one radius.</h2>
+    <h2>Three steps, one network.</h2>
   </div>
   <div class="steps">
     <div class="step">
-      <div class="dist mono">STEP — UPLOAD</div>
-      <h3>Drop in a CAD file</h3>
-      <p>STEP, STL, SLDPRT, DXF and more — we take it from there: tolerances, material options, the right process.</p>
+      <div class="dist mono">STEP — REQUEST</div>
+      <h3>Send us the job</h3>
+      <p>Drop in a CAD file — STEP, STL, SLDPRT, DXF and more — plus tolerances, material, quantity and deadline. No drawing yet? Tell us what needs designing, building, repairing or assembling and we'll scope it.</p>
     </div>
     <div class="step">
       <div class="dist mono">STEP — CONNECT</div>
-      <h3>We connect you with shops by distance</h3>
-      <p>We broadcast to vetted shops inside your radius first — and widen only if none can meet the job.</p>
+      <h3>Get matched to a shop nearby</h3>
+      <p>Matched on what the job actually needs — design, machining, fabrication, repair or assembly — not just what a shop's listing claims. We broadcast inside your radius first, and widen only if nothing nearby can meet it.</p>
     </div>
     <div class="step">
       <div class="dist mono">STEP — SHIP</div>
-      <h3>Compare, order, drive over</h3>
-      <p>Quotes tagged with real distance and drive time. Pick on price, lead time, or the shop on your way home.</p>
+      <h3>Compare, order, it's made and moved</h3>
+      <p>Quotes tagged with real distance and drive time. Pick on price, lead time, or the shop on your way home — then production runs as one coordinated order, however many steps it takes, with pickup or delivery once it's ready.</p>
     </div>
   </div>
 </section>
@@ -747,57 +744,46 @@
 <section class="tiers" id="tiers">
   <div class="section-head">
     <span class="section-tag">RADIUS TIERS</span>
-    <h2>Every job gets matched to a tier, then matched to a shop.</h2>
+    <h2>Start nearby. Expand only when needed.</h2>
   </div>
-
-  <div class="tier-row">
-    <div class="tier-radius">0–80 km</div>
-    <div class="tier-desc"><h4>Local</h4><p>Same-day pickup shops. Best for prototypes, rush jobs, and parts you want to inspect in person.</p></div>
-    <div class="tier-eta"><b>Same day</b>typical pickup</div>
-  </div>
-  <div class="tier-row">
-    <div class="tier-radius">80–250 km</div>
-    <div class="tier-desc"><h4>Regional</h4><p>A wider bench of processes and materials while keeping freight to a single ground hop.</p></div>
-    <div class="tier-eta"><b>1–3 days</b>typical ground</div>
-  </div>
-  <div class="tier-row">
-    <div class="tier-radius">250–1000 km</div>
-    <div class="tier-desc"><h4>Extended</h4><p>Opens up for specialty processes — injection molding, exotic alloys — that thin out at shorter radii.</p></div>
-    <div class="tier-eta"><b>3–5 days</b>typical ground</div>
-  </div>
-  <div class="tier-row">
-    <div class="tier-radius">1000+ km</div>
-    <div class="tier-desc"><h4>Nationwide</h4><p>Falls back to the full network only when nothing closer can hit spec, quantity, or certification.</p></div>
-    <div class="tier-eta"><b>5–8 days</b>freight-dependent</div>
+  <div class="steps">
+    <div class="step">
+      <div class="dist mono">LOCAL</div>
+      <p>Nearby capacity for prototypes, urgent jobs and easy inspection.</p>
+    </div>
+    <div class="step">
+      <div class="dist mono">REGIONAL</div>
+      <p>More processes and materials when local capacity isn't enough.</p>
+    </div>
+    <div class="step">
+      <div class="dist mono">NATIONAL</div>
+      <p>Specialised capabilities when proximity is no longer the priority.</p>
+    </div>
   </div>
 </section>
 
 <section class="why" id="why">
   <div class="section-head">
     <span class="section-tag">WHY PROXIMITY</span>
-    <h2>Some things only work when you can walk into the shop.</h2>
+    <h2>Why nearby matters</h2>
     <p class="lead">A price-and-lead-time match can be automated from anywhere. These can't — they're the reason proximity is the point, not a filter.</p>
   </div>
   <div class="steps">
     <div class="step">
-      <div class="dist mono">WALK THE FLOOR</div>
-      <h3>See it before you commit</h3>
-      <p>Walk in, see the machines, meet the operator — before a rupee changes hands. Hard to do from a thousand kilometres away.</p>
+      <div class="dist mono">SEE THE SHOP</div>
+      <p>Visit the floor. See the machine. Meet the maker.</p>
     </div>
     <div class="step">
-      <div class="dist mono">IN-PERSON QA</div>
-      <h3>Audit in person, not by photo</h3>
-      <p>First-article inspection on-site instead of waiting on emailed CMM reports. Catch a tolerance issue in the room, not after freight.</p>
+      <div class="dist mono">CHECK THE WORK</div>
+      <p>Inspect prototypes and first articles locally.</p>
     </div>
     <div class="step">
-      <div class="dist mono">SENSITIVE WORK</div>
-      <h3>Defence &amp; SCOMET-aware sourcing</h3>
-      <p>Some jobs need a face-to-face relationship with the shop floor — not a certification checkbox in a quoting engine.</p>
+      <div class="dist mono">MOVE FASTER</div>
+      <p>Pickup and delivery become simpler.</p>
     </div>
     <div class="step">
-      <div class="dist mono">RUSH JOBS</div>
-      <h3>Same-afternoon, not same-week</h3>
-      <p>When a prototype breaks on a Tuesday, "drive over this afternoon" beats "ships in three days" every time.</p>
+      <div class="dist mono">EXPEDITE FOLLOW-UPS</div>
+      <p>When something changes, you're dealing with a shop you can actually reach.</p>
     </div>
   </div>
 </section>
@@ -855,13 +841,15 @@
       <div class="info-block">
         <h4>In-scope categories</h4>
         <ul class="chip-list">
+          <li>Design</li>
           <li>CNC</li>
           <li>Fabrication</li>
           <li>Machining</li>
           <li>Laser</li>
           <li>Injection Molding</li>
           <li>3D Printing</li>
-          <li>Components</li>
+          <li>Repair</li>
+          <li>Assembly</li>
         </ul>
       </div>
       <div class="info-block">
@@ -892,13 +880,15 @@
             <label for="reqCategory">Work category</label>
             <select id="reqCategory" required>
               <option value="" disabled selected>Select category</option>
+              <option value="design">Design</option>
               <option value="cnc">CNC</option>
               <option value="fabrication">Fabrication</option>
               <option value="machining">Machining</option>
               <option value="laser">Laser</option>
               <option value="molding">Injection Molding</option>
               <option value="additive">3D Printing</option>
-              <option value="components">Components</option>
+              <option value="repair">Repair</option>
+              <option value="assembly">Assembly</option>
               <option value="other">Other / Custom Process</option>
             </select>
           </div>
@@ -927,10 +917,9 @@
         <div class="field">
           <label for="reqRadius">Preferred match radius</label>
           <select id="reqRadius">
-            <option value="local">Local — 0–80 km</option>
-            <option value="regional" selected>Regional — 80–250 km</option>
-            <option value="extended">Extended — 250–1000 km</option>
-            <option value="nationwide">Nationwide — 1000+ km</option>
+            <option value="local">Local</option>
+            <option value="regional" selected>Regional</option>
+            <option value="national">National</option>
           </select>
         </div>
 
@@ -976,13 +965,15 @@
       <div class="info-block">
         <h4>Capabilities we're onboarding</h4>
         <ul class="chip-list">
+          <li>Design</li>
           <li>CNC</li>
           <li>Fabrication</li>
           <li>Machining</li>
           <li>Laser</li>
           <li>Injection Molding</li>
           <li>3D Printing</li>
-          <li>Components</li>
+          <li>Repair</li>
+          <li>Assembly</li>
         </ul>
       </div>
       <div class="info-block">
@@ -1036,13 +1027,15 @@
         <div class="field">
           <label>Capabilities</label>
           <div class="capability-toggles" id="capToggles">
+            <label class="cap-pill"><input type="checkbox" value="Design">Design</label>
             <label class="cap-pill"><input type="checkbox" value="CNC">CNC</label>
             <label class="cap-pill"><input type="checkbox" value="Fabrication">Fabrication</label>
             <label class="cap-pill"><input type="checkbox" value="Machining">Machining</label>
             <label class="cap-pill"><input type="checkbox" value="Laser">Laser</label>
             <label class="cap-pill"><input type="checkbox" value="Injection Molding">Injection Molding</label>
             <label class="cap-pill"><input type="checkbox" value="3D Printing">3D Printing</label>
-            <label class="cap-pill"><input type="checkbox" value="Components">Components</label>
+            <label class="cap-pill"><input type="checkbox" value="Repair">Repair</label>
+            <label class="cap-pill"><input type="checkbox" value="Assembly">Assembly</label>
           </div>
         </div>
 
@@ -1115,13 +1108,12 @@
     return prefix + '-' + Math.floor(100000 + Math.random()*900000);
   }
   const CATEGORY_LABELS = {
-    cnc:'CNC', fabrication:'Fabrication', machining:'Machining', laser:'Laser',
-    molding:'Injection Molding', additive:'3D Printing', components:'Components',
+    design:'Design', cnc:'CNC', fabrication:'Fabrication', machining:'Machining', laser:'Laser',
+    molding:'Injection Molding', additive:'3D Printing', repair:'Repair', assembly:'Assembly',
     other:'Other / Custom Process'
   };
   const RADIUS_LABELS = {
-    local:'Local — 0–80 km', regional:'Regional — 80–250 km',
-    extended:'Extended — 250–1000 km', nationwide:'Nationwide — 1000+ km'
+    local:'Local', regional:'Regional', national:'National'
   };
   const METRO_LABELS = {
     pune:'Pune & Western Maharashtra', chennai:'Chennai & Sriperumbudur',
