@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -130,6 +130,7 @@
   }
   .mobile-menu nav a:hover{color:var(--amber);}
   .mobile-menu .btn-primary.full{text-align:center;}
+  .mobile-menu .btn-primary.full + .btn-primary.full{margin-top:12px;}
 
   body.no-scroll{overflow:hidden;}
 
@@ -546,8 +547,12 @@
 <script>
   (function(){
     try{
+      // Default launch theme is dark. Only switch to light if the
+      // visitor explicitly chose it on a previous visit.
       if(localStorage.getItem('locometry-theme') === 'light'){
         document.documentElement.setAttribute('data-theme','light');
+      } else {
+        document.documentElement.setAttribute('data-theme','dark');
       }
     }catch(e){}
   })();
@@ -592,7 +597,6 @@
     <a href="#how">How it works</a>
     <a href="#tiers">Radius tiers</a>
     <a href="#metros">Founding clusters</a>
-    <a href="#request">Submit a job</a>
     <a href="#shops">Machine shops</a>
   </nav>
   <div class="header-actions">
@@ -605,6 +609,7 @@
         <path d="M12 2.5v2.6M12 18.9v2.6M4.4 4.4l1.85 1.85M17.75 17.75l1.85 1.85M2.5 12h2.6M18.9 12h2.6M4.4 19.6l1.85-1.85M17.75 6.25l1.85-1.85" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
       </svg>
     </button>
+    <a class="nav-cta" href="#request">Submit a job →</a>
     <a class="nav-cta" href="#shops">Register your shop →</a>
     <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
       <span></span><span></span><span></span>
@@ -620,9 +625,9 @@
     <a href="#how">How it works</a>
     <a href="#tiers">Radius tiers</a>
     <a href="#metros">Founding clusters</a>
-    <a href="#request">Submit a job</a>
     <a href="#shops">Machine shops</a>
   </nav>
+  <a class="btn-primary full" href="#request">Submit a job →</a>
   <a class="btn-primary full" href="#shops">Register your shop →</a>
 </div>
 
@@ -1335,7 +1340,7 @@
   themeToggle.addEventListener('click', () => {
     const isLight = rootEl.getAttribute('data-theme') === 'light';
     if(isLight){
-      rootEl.removeAttribute('data-theme');
+      rootEl.setAttribute('data-theme','dark');
       themeToggle.setAttribute('aria-label','Switch to light theme');
       try{ localStorage.setItem('locometry-theme','dark'); }catch(e){}
     }else{
